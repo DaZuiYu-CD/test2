@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cd.bishe.mapper.QuestionnaireMapper">
+  <resultMap id="BaseResultMap" type="com.cd.bishe.domain.Questionnaire">
+    <id column="q_id" jdbcType="INTEGER" property="qId" />
+    <result column="q_name" jdbcType="VARCHAR" property="qName" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from questionnaire
+    where q_id = #{qId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cd.bishe.domain.Questionnaire">
+    insert into questionnaire (q_id, q_name, status, 
+      answer, create_time, update_time
+      )
+    values (#{qId,jdbcType=INTEGER}, #{qName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{answer,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.cd.bishe.domain.Questionnaire">
+    update questionnaire
+    set q_name = #{qName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      answer = #{answer,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where q_id = #{qId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select q_id, q_name, status, answer, create_time, update_time
+    from questionnaire
+    where q_id = #{qId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select q_id, q_name, status, answer, create_time, update_time
+    from questionnaire
+  </select>
+</mapper>

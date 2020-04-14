@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cd.bishe.mapper.OptionMapper">
+  <resultMap id="BaseResultMap" type="com.cd.bishe.domain.Option">
+    <id column="opt_id" jdbcType="INTEGER" property="optId" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="q_num" jdbcType="INTEGER" property="qNum" />
+    <result column="next_num" jdbcType="INTEGER" property="nextNum" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from option
+    where opt_id = #{optId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cd.bishe.domain.Option">
+    insert into option (opt_id, question_id, content, 
+      q_num, next_num, score
+      )
+    values (#{optId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{qNum,jdbcType=INTEGER}, #{nextNum,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.cd.bishe.domain.Option">
+    update option
+    set question_id = #{questionId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      q_num = #{qNum,jdbcType=INTEGER},
+      next_num = #{nextNum,jdbcType=INTEGER},
+      score = #{score,jdbcType=DOUBLE}
+    where opt_id = #{optId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select opt_id, question_id, content, q_num, next_num, score
+    from option
+    where opt_id = #{optId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select opt_id, question_id, content, q_num, next_num, score
+    from option
+  </select>
+</mapper>

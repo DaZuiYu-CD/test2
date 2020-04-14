@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cd.bishe.mapper.KnowledgeMapper">
+  <resultMap id="BaseResultMap" type="com.cd.bishe.domain.Knowledge">
+    <id column="k_id" jdbcType="INTEGER" property="kId" />
+    <result column="knowledge" jdbcType="VARCHAR" property="knowledge" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from knowledge
+    where k_id = #{kId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cd.bishe.domain.Knowledge">
+    insert into knowledge (k_id, knowledge)
+    values (#{kId,jdbcType=INTEGER}, #{knowledge,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.cd.bishe.domain.Knowledge">
+    update knowledge
+    set knowledge = #{knowledge,jdbcType=VARCHAR}
+    where k_id = #{kId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select k_id, knowledge
+    from knowledge
+    where k_id = #{kId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select k_id, knowledge
+    from knowledge
+  </select>
+</mapper>

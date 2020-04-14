@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cd.bishe.mapper.ReservationMapper">
+  <resultMap id="BaseResultMap" type="com.cd.bishe.domain.Reservation">
+    <id column="r_id" jdbcType="INTEGER" property="rId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="wx_name" jdbcType="VARCHAR" property="wxName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="banji" jdbcType="VARCHAR" property="banji" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reservation
+    where r_id = #{rId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cd.bishe.domain.Reservation">
+    insert into reservation (r_id, phone, wx_name, 
+      name, banji, mail)
+    values (#{rId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{wxName,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{banji,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.cd.bishe.domain.Reservation">
+    update reservation
+    set phone = #{phone,jdbcType=VARCHAR},
+      wx_name = #{wxName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      banji = #{banji,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR}
+    where r_id = #{rId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select r_id, phone, wx_name, name, banji, mail
+    from reservation
+    where r_id = #{rId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select r_id, phone, wx_name, name, banji, mail
+    from reservation
+  </select>
+</mapper>
